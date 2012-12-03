@@ -1,7 +1,7 @@
 # About
 This is a simple C / C++ unit testing framework with no non-standard deps. You 
 can use it in your EECS projects, assuming of course that doing so does not 
-violate the code use, or honor code restrictions by which you MUST abide.
+violate the code use, or honor code restrictions, by which you MUST abide.
 
 # Useage
 To use in your unit tests, simply include `unit_test_framework.h` in the file, 
