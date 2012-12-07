@@ -28,7 +28,7 @@ If you want to have a folder specifically for tests, run `mkdir tests` on the ro
 	    return 0;
     }
     
-Compile at the root level:
+Compile at the project's root folder:
 
     g++ tests/test.cpp -o test unit-test-framework/unit_test_framework.c
 
