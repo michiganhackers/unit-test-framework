@@ -15,7 +15,7 @@ If you want to have a folder specifically for tests, run `mkdir tests` on the ro
     int main(int argc, char const *argv[])
     {
       // Describe the suite of tests to be run.
-        start_suite("Start Dlist test suite:");
+        start_suite("Start test suite:");
         
       // Run some tests.
 	    if( assertEqual(1, 1) )
