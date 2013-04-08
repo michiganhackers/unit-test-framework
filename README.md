@@ -3,10 +3,40 @@ This is a simple C / C++ unit testing framework with no non-standard deps. You
 can use it in your EECS projects, assuming of course that doing so does not 
 violate the code use, or honor code restrictions, by which you MUST abide.
 
-# Useage
-To use in your unit tests, simply include `unit_test_framework.h` in the file, 
-and compile against `unit_test_framework.cpp` or a generated object file. It's 
-that simple!
+# Usage
+First, clone the framework into your project folder:
+
+    git clone https://github.com/michiganhackers/unit-test-framework.git
+
+If you want to have a folder specifically for tests, run `mkdir tests` on the root level of your project and add a test file:
+
+    #include "../unit-test-framework/unit_test_framework.h"
+    
+    int main(int argc, char const *argv[])
+    {
+      // Describe the suite of tests to be run.
+        start_suite("Start test suite:");
+        
+      // Run some tests.
+	    if( assertEqual(1, 1) )
+		    test_passed("1 is equal to 1!");
+	    else
+		    test_failed("1 is not equal to one.");
+        
+      // End the suite
+	    end_suite();
+	    return 0;
+    }
+    
+Compile at the project's root folder:
+
+    g++ tests/test.cpp -o test unit-test-framework/unit_test_framework.c
+
+Run your test suite:
+
+    ./test
+    
+That's it!
 
 # Contributors
 We (I) would love to get feedback on this, either via issue submissions, or via
@@ -14,6 +44,7 @@ pull-requests. If you submit a pull-request, be sure to add your name to this
 list. 
 
 + Max Seiden <140dbs@gmail.com>
++ Ryan Gonzalez <ryan@ionizedmedia.com>
 
 # License
 Copyright (C) 2012 Max Seiden <140dbs@gmail.com>
