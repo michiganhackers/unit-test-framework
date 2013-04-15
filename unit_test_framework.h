@@ -14,6 +14,12 @@
 // <1 : arg1 < arg2 | 0 : arg1 == arg2 | >1 : arg1 > arg2
 typedef int(*cmp_fn_t)(const void*, const void*);
 
+// Typedefs for setup / takedown / test functions for ease of use.
+typedef void (*setup_fn_t)(void);
+
+// Typedef for a test function
+typedef setup_fn_t test_fn_t;
+
 // Output logging helper functions
 void test_description(const char * const);
 void test_passed(const char * const);
@@ -42,6 +48,11 @@ _BOOL_RETURN_TYPE assertGreaterEqualCmp(const void*, const void*, cmp_fn_t cmp);
 
 _BOOL_RETURN_TYPE assertIsNull(const void*);
 _BOOL_RETURN_TYPE assertNotNull(const void*);
+
+// Prototypes for test runner functions
+void setBeforeFunc(setup_fn_t setup);
+void runTest(test_fn_t test, const char* const test_name);
+void setAfterFunc(setup_fn_t takedown);
 
 #endif
 
