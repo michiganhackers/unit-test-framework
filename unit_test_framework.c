@@ -18,17 +18,24 @@
 #define _GREEN "\033[32m"
 #define _YELLOW "\033[33m"
 #define _WHITE "\033[37m"
+#define _BLUE  "\x1B[34m"
 
 // Helper prototypes
 static void print_error(const int, const int, const char * const);
 static _BOOL_RETURN_TYPE negate(const _BOOL_RETURN_TYPE);
 static int int_cmp(const int*, const int*);
 static void reset_color(void);
+static void setup();
+static void takedown();
 
 // Global static variables
 static uint32_t num_passed_g;
 static uint32_t num_failed_g;
 static uint32_t test_number_g;
+
+// Global static function pointers, set to their defaults
+static setup_fn_t test_setup    = setup;
+static setup_fn_t test_takedown = takedown;
 
 // Test start and end functions
 void start_suite(const char * const log_msg) {
@@ -146,6 +153,34 @@ assertIsNotNull(const void* arg1) {
 	return arg1 != NULL ? _TRUE : _FALSE;
 }
 
+void setBeforeFunc(setup_fn_t setup) {
+	test_setup = setup;
+}
+
+void setAfterFunc(setup_fn_t takedown) {
+	test_takedown = takedown;
+}
+
+void runTest(test_fn_t test, const char* const test_name) {
+	fprintf(stderr, "\n" _BLUE "[Start Test] %s\n", test_name);
+	reset_color();
+	test_setup();
+	test();
+	test_takedown();
+	fprintf(stderr, "\n" _BLUE "[End Test] %s\n", test_name);
+	reset_color();
+}
+
+// Default setup function, does nothing
+void setup() {
+	return;
+}
+
+// Default takedown function, does nothing
+void takedown() {
+	return;
+}
+
 // Default compare function for ints
 int int_cmp(const int *arg1, const int *arg2) {
 	return *arg1 - *arg2;
@@ -165,3 +200,5 @@ void print_error(const int arg1, const int arg2, const char * const log_msg) {
 	fprintf(stderr, "%s%i %s %i\n", _RED, arg1, log_msg, arg2);
 	reset_color();
 }
+
+

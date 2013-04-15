@@ -3,7 +3,7 @@ This is a simple C / C++ unit testing framework with no non-standard deps. You
 can use it in your EECS projects, assuming of course that doing so does not 
 violate the code use, or honor code restrictions, by which you MUST abide.
 
-# Usage
+# Basic Usage
 First, clone the framework into your project folder:
 
     git clone https://github.com/michiganhackers/unit-test-framework.git
@@ -38,6 +38,53 @@ Run your test suite:
     
 That's it!
 
+# Advanced Usage
+Maybe you want this to be a little more like JUnit in Java, or you just like organizing a test into its own function, and sharing setup and takedown functions between tests. 
+
+1. Write your before/setup function. By default, a setup function that does nothing is used.
+
+    ```
+    void setup(void) {
+      // Do some setup here, probably set some global variables
+    }
+    ```
+
+2. Write an after/takedown function. By default, a takedown function that does nothing is used.
+
+    ```
+    void takedown(void) {
+      // Get everything back to a clean slate
+    }
+    ```
+
+3. Register the callbacks
+
+    ```
+    setBeforeFunc(before);
+    setAfterFunc(after);
+    ```
+
+4. Write some test function
+
+    ```
+    void test1() {
+        // Set some variables using global variables set during setup()
+        if( assertEqual(something, something_from_setup) )
+            test_passed("Yay!");
+        else
+            test_failed("Boo!");
+    }
+    ```
+
+5. Run the test
+
+    ```
+    runTest(test1, "Test 1");
+    ```
+
+Now execution of `test1()` is wrapped inbetween calls to `setup()` and `takedown()`.
+
+
 # Contributors
 We (I) would love to get feedback on this, either via issue submissions, or via
 pull-requests. If you submit a pull-request, be sure to add your name to this 
@@ -45,6 +92,7 @@ list.
 
 + Max Seiden <140dbs@gmail.com>
 + Ryan Gonzalez <ryan@ionizedmedia.com>
++ David Adrian <davidcadrian@gmail.com>
 
 # License
 Copyright (C) 2012 Max Seiden <140dbs@gmail.com>
