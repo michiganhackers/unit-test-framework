@@ -169,7 +169,7 @@ void runTest(test_fn_t test, const char* const test_name) {
 	test_setup();
 	test();
 	test_takedown();
-	fprintf(stderr, "\n" _BLUE "[End Test] %s\n", test_name);
+	fprintf(stderr, _BLUE "[End Test] %s\n", test_name);
 	reset_color();
 }
 
