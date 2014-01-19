@@ -93,6 +93,7 @@ list.
 + Max Seiden <140dbs@gmail.com>
 + Ryan Gonzalez <ryan@ionizedmedia.com>
 + David Adrian <davidcadrian@gmail.com>
++ Thomas Lovett <tklovett@gmail.com>
 
 # License
 Copyright (C) 2012 Max Seiden <140dbs@gmail.com>
