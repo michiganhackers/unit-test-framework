@@ -3,8 +3,10 @@
 
 #include "./unit_test_framework.h"
 
-// NOTE - These are for readability and portability, and should not be used 
-// outside of this file. Ever.
+/*
+*   NOTE - These are for readability and portability, and should not be used
+*   outside of this file. Ever.
+*/
 #ifdef __cplusplus
 	#define _TRUE true
 	#define _FALSE false
@@ -13,14 +15,14 @@
 	#define _FALSE 0
 #endif
 
-// Defines the color codes
+/* Defines the color codes */
 #define _RED "\033[31m"
 #define _GREEN "\033[32m"
 #define _YELLOW "\033[33m"
 #define _WHITE "\033[37m"
 #define _BLUE  "\x1B[34m"
 
-// Helper prototypes
+/* Helper prototypes */
 static void print_error(const int, const int, const char * const);
 static _BOOL_RETURN_TYPE negate(const _BOOL_RETURN_TYPE);
 static int int_cmp(const int*, const int*);
@@ -28,16 +30,16 @@ static void reset_color(void);
 static void setup();
 static void takedown();
 
-// Global static variables
+/* Global static variables */
 static uint32_t num_passed_g;
 static uint32_t num_failed_g;
 static uint32_t test_number_g;
 
-// Global static function pointers, set to their defaults
+/* Global static function pointers, set to their defaults */
 static setup_fn_t test_setup    = setup;
 static setup_fn_t test_takedown = takedown;
 
-// Test start and end functions
+/* Test start and end functions */
 void start_suite(const char * const log_msg) {
 	num_passed_g = num_failed_g = test_number_g = 0;
 	fprintf(stderr, "\n\033[33m[Start Suite] %s\n", log_msg);
@@ -70,7 +72,7 @@ void test_failed(const char * const log_msg) {
 	++num_failed_g;
 }
 
-// Prototypes for the checking functions
+/* Prototypes for the checking functions */
 _BOOL_RETURN_TYPE 
 assertEqual(const int arg1, const int arg2) {
 	_BOOL_RETURN_TYPE res = assertEqualCmp(&arg1, &arg2, (cmp_fn_t)int_cmp);
@@ -171,27 +173,27 @@ void runTest(test_fn_t test, const char* const test_name) {
 	reset_color();
 }
 
-// Default setup function, does nothing
+/* Default setup function, does nothing */
 void setup() {
 	return;
 }
 
-// Default takedown function, does nothing
+/* Default takedown function, does nothing */
 void takedown() {
 	return;
 }
 
-// Default compare function for ints
+/* Default compare function for ints */
 int int_cmp(const int *arg1, const int *arg2) {
 	return *arg1 - *arg2;
 }
 
-// Returns the correct logical opposite of the given input
+/* Returns the correct logical opposite of the given input */
 _BOOL_RETURN_TYPE negate(const _BOOL_RETURN_TYPE val) {
 	return val == _TRUE ? _FALSE : _TRUE;
 }
 
-// Resets the terminal's color to white
+/* Resets the terminal's color to white */
 void reset_color() {
 	fprintf(stderr, "%s", _WHITE);
 }
