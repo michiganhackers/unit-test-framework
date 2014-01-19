@@ -49,7 +49,7 @@ _BOOL_RETURN_TYPE assertGreaterEqual(const int, const int);
 _BOOL_RETURN_TYPE assertGreaterEqualCmp(const void*, const void*, cmp_fn_t cmp);
 
 _BOOL_RETURN_TYPE assertIsNull(const void*);
-_BOOL_RETURN_TYPE assertNotNull(const void*);
+_BOOL_RETURN_TYPE assertIsNotNull(const void*);
 
 /* Prototypes for test runner functions */
 void setBeforeFunc(setup_fn_t setup);
